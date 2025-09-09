@@ -1,8 +1,14 @@
 ﻿using System;
 using Game.UI;
+using JetBrains.Annotations;
 using ModdingOverhauled.Misc;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
+// ReSharper disable UnusedMember.Global
+// ReSharper disable UnusedMethodReturnValue.Global
+// ReSharper disable MemberCanBeProtected.Global
 
 namespace ModdingOverhauled.ConfigModule.UI
 {
@@ -15,14 +21,14 @@ namespace ModdingOverhauled.ConfigModule.UI
 
         public virtual void OnSave() 
         {
-            Printer.Warn($"Saving {this.GetType()}");
+            Printer.Warn($"Saving {GetType()}");
             try
             {
                 ModConfigManager.SaveConfigFromMod(this);
             }
             catch (Exception e)
             {
-                Printer.Error($"Error while trying to save {this.GetType()}\n{e}");
+                Printer.Error($"Error while trying to save {GetType()}\n{e}");
             }
         }
         public abstract void DoWindowContent();
@@ -33,27 +39,28 @@ namespace ModdingOverhauled.ConfigModule.UI
             if(!on)
                 OnSave();
         }
-
-        public void Checkbox(string text, bool value, UnityAction<bool> onChanged)
+        
+        public Toggle Checkbox(string text, bool value, UnityAction<bool> onChanged)
         {
-            UIBuilder.CreateToggle("UIToggleWidget", transform, 
+            return UIBuilder.CreateToggle("UIToggleWidget", transform, 
                 text, value, onChanged);
         }
 
-        public void Label(string text)
+        public TMP_Text Label(string text)
         {
-            UIBuilder.CreateText("UILabelWidget", text, transform);
+            return UIBuilder.CreateText("UILabelWidget", text, transform);
         }
 
-        public void Slider(float value, UnityAction<float> onChanged)
+        public Slider Slider(float value, UnityAction<float> onChanged)
         {
-            UIBuilder.CreateSlider("UISliderWidget", value, onChanged, base.transform);
+            return UIBuilder.CreateSlider("UISliderWidget", value, onChanged, transform);
         }
 
-        public void TextInput(string value, string text, UnityAction<string> onTextChanged)
+        public TMP_InputField TextInput(string value, string text, UnityAction<string> onTextChanged)
         {
-            var input = UIBuilder.CreateInputField("UITextInputWidget", value, text, base.transform);
+            var input = UIBuilder.CreateInputField("UITextInputWidget", value, text, transform);
             input.onValueChanged.AddListener(onTextChanged);
+            return input;
         }
     }
 }

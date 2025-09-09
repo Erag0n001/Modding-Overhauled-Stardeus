@@ -10,14 +10,14 @@
     <RootNamespace>ModdingOverhauled</RootNamespace>
     <AssemblyName>ModdingOverhauled</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>latest</LangVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
     <NoWarn>$(NoWarn);CS0000</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>embedded</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\Libraries\</OutputPath>
@@ -26,13 +26,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>embedded</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\..\Libraries\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <Target Name="ClearOutputPath" BeforeTargets="PrepareForBuild">
+    <RemoveDir Directories="$(OutputPath)" />
+    <MakeDir Directories="$(OutputPath)" />
+  </Target>
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\0Harmony.dll</HintPath>
@@ -58,10 +62,6 @@
       <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\KLUnityUtils.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="mcs">
-      <HintPath>..\..\Third Party\UnityExplorer\Content\mcs.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="MessagePack">
       <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\MessagePack.dll</HintPath>
       <Private>False</Private>
@@ -69,24 +69,6 @@
     <Reference Include="MessagePack.Annotations">
       <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\MessagePack.Annotations.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>..\..\Third Party\UnityExplorer\Content\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>..\..\Third Party\UnityExplorer\Content\Mono.Cecil.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>..\..\Third Party\UnityExplorer\Content\Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>..\..\Third Party\UnityExplorer\Content\Mono.Cecil.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.RuntimeDetour">
-      <HintPath>..\..\Third Party\UnityExplorer\Content\MonoMod.RuntimeDetour.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.Utils">
-      <HintPath>..\..\Third Party\UnityExplorer\Content\MonoMod.Utils.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\mscorlib.dll</HintPath>
@@ -100,9 +82,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tomlet">
-      <HintPath>..\..\Third Party\UnityExplorer\Content\Tomlet.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
@@ -123,12 +102,6 @@
       <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityExplorer.Standalone.Mono">
-      <HintPath>..\..\Third Party\UnityExplorer\Content\UnityExplorer.STANDALONE.Mono.dll</HintPath>
-    </Reference>
-    <Reference Include="UniverseLib.Mono">
-      <HintPath>..\..\Third Party\UnityExplorer\Content\UniverseLib.Mono.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetBundleModule\AssetBundleManager.cs" />
@@ -140,22 +113,12 @@
     <Compile Include="ConfigModule\Patches\ModLoaderPatch.cs" />
     <Compile Include="ConfigModule\Translations.cs" />
     <Compile Include="ConfigModule\UI\ModConfigs.cs" />
-    <Compile Include="Configs\ConfigDataModdingOverhauled.cs" />
-    <Compile Include="Configs\ModConfigsModdingOverhauled.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Misc\Patches\SystemsDataPatches.cs" />
     <Compile Include="Misc\Printer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnityExplorerModule\Patches\MainMenuPatch.cs" />
-    <Compile Include="UnityExplorerModule\UnityExplorerManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Third Party\UnityExplorer\Content\UnityExplorer.prefab">
-      <Link>UnityExplorer.prefab</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
+    <Folder Include="Configs\" />
     <Folder Include="SteamUploadOverrideModule\Patches\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

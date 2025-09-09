@@ -30,6 +30,11 @@ namespace ModdingOverhauled.ConfigModule.Patches
             if (Patched)
                 return;
             Printer.Warn("Patching main menu");
+            if (Main.ModConfigsTypes.Count == 0)
+            {
+                Patched = true;
+                return;
+            }
             List<MainMenuButton> buttons = (List<MainMenuButton>)currentButtons.GetValue(__instance);
             if (buttons == null)
                 return;

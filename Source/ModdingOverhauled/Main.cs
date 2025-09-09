@@ -7,9 +7,7 @@ using Game.Data;
 using HarmonyLib;
 using ModdingOverhauled.ConfigModule;
 using ModdingOverhauled.ConfigModule.Patches;
-using ModdingOverhauled.Configs;
 using ModdingOverhauled.Misc;
-using ModdingOverhauled.UnityExplorerModule;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,7 +17,6 @@ namespace ModdingOverhauled
     {
         public static Harmony harmony;
         internal static ModInfo ModdingOverhauled;
-        internal static ConfigDataModdingOverhauled Config;
         public static Dictionary<ModInfo, Type> ModConfigsTypes = new Dictionary<ModInfo, Type>();
         public static Dictionary<ModInfo, Type> ConfigDataTypes = new Dictionary<ModInfo, Type>();
         public static Dictionary<ModInfo, ConfigData> ConfigFromMod = new Dictionary<ModInfo, ConfigData>();
@@ -33,7 +30,6 @@ namespace ModdingOverhauled
             CheckDirectories();
             SetupListeners();
             Printer.Warn($"Loaded config module!");
-            LoadConfig();
             Printer.Warn($"Loaded AssetBundle module!");
         }
 
@@ -60,12 +56,6 @@ namespace ModdingOverhauled
         {
             if (after.name == "MainMenu")
                 MainMenuPatch.Patched = false;
-        }
-
-        static void LoadConfig()
-        {
-            ModConfigManager.GetConfigFromMod(Assembly.GetAssembly(typeof(Main)), ModdingOverhauled);
-            Config = (ConfigDataModdingOverhauled)ConfigData.LoadConfig(ModdingOverhauled);
         }
     }
 }
