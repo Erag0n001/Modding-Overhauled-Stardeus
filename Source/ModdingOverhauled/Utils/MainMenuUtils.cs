@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using Game.UI;
 using HarmonyLib;
@@ -18,12 +19,17 @@ public static class MainMenuUtils
 
     public static void RemoveMainMenuButton(MainMenuButton button)
     {
+        if (!button)
+        {
+            Printer.Error($"Tried removing a null button to main menu!\n{new StackTrace()}");
+            return;
+        }
         if (!Menu)
         {
             Printer.Error($"Tried removing a main menu button with name {button.Text}, but there is no menu!");
             return;
         }
-
+        
         var rootButton = GetRootButtons();
         rootButton.Remove(button);
         var currentButtons = GetCurrentButtons();
@@ -32,6 +38,12 @@ public static class MainMenuUtils
     
     public static void AddMainMenuButton(MainMenuButton button, int index = -1)
     {
+        if (!button)
+        {
+            Printer.Error($"Tried adding a null button to main menu!\n{new StackTrace()}");
+            return;
+        }
+        
         if (!Menu)
         {
             Printer.Error($"Tried adding a main menu button with name {button.Text}, but there is no menu!");
