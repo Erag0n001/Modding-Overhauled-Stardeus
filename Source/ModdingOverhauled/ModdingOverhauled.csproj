@@ -128,4 +128,51 @@
     <Compile Include="Utils\MainMenuUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+  <!-- Automatic version incremenetation -->
+
+  <Target Name="IncrementModVersion" AfterTargets="Build">
+    <IncrementModVersion JsonFile="$(ProjectDir)..\..\ModInfo.json" />
+  </Target>
+  
+  <UsingTask TaskName="IncrementModVersion"
+             TaskFactory="CodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <JsonFile ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Text.RegularExpressions" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+        if (!File.Exists(JsonFile))
+        {
+            Log.LogError("File not found: " + JsonFile);
+            return false;
+        }
+
+        string text = File.ReadAllText(JsonFile);
+
+        text = Regex.Replace(text,
+            @"""ModVersion""\s*:\s*""(\d+)\.(\d+)\.(\d+)""",
+            delegate(Match m)
+            {
+                int major = int.Parse(m.Groups[1].Value);
+                int minor = int.Parse(m.Groups[2].Value);
+                int build = int.Parse(m.Groups[3].Value) + 1;
+
+                return "\"ModVersion\": \"" + major + "." + minor + "." + build + "\"";
+            }
+        );
+
+        File.WriteAllText(JsonFile, text);
+
+        return true;
+      ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+  
 </Project>
