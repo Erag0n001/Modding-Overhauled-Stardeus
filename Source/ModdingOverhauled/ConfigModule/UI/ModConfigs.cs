@@ -1,7 +1,6 @@
 ﻿using System;
 using Game.UI;
-using JetBrains.Annotations;
-using ModdingOverhauled.Misc;
+using ModdingOverhauled.Logging;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;

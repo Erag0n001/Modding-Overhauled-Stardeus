@@ -4,7 +4,7 @@ using System.Linq;
 using Game;
 using Game.Data;
 using MessagePack;
-using ModdingOverhauled.Misc;
+using ModdingOverhauled.Logging;
 
 namespace ModdingOverhauled.ConfigModule
 {

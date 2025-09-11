@@ -7,7 +7,7 @@ using Game.Data;
 using KL.Utils;
 using MessagePack;
 using ModdingOverhauled.ConfigModule.UI;
-using ModdingOverhauled.Misc;
+using ModdingOverhauled.Logging;
 
 namespace ModdingOverhauled.ConfigModule
 {

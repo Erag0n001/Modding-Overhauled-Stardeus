@@ -1,69 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Game;
 using Game.Data;
 using Game.UI;
 using HarmonyLib;
-using ModdingOverhauled.Misc;
+using ModdingOverhauled.Logging;
+using ModdingOverhauled.Utils;
 
 namespace ModdingOverhauled.ConfigModule.Patches
 {
     [HarmonyPatch(typeof(MainMenu), "ShowMainMenu")]
     public static class MainMenuPatch
     {
-        public static FieldInfo currentButtons;
-        private static MethodInfo CreateButton;
-        private static MethodInfo ShowMainMenu;
-        internal static bool Patched;
-        static MainMenuPatch()
+        [HarmonyPrefix]
+        public static void Prefix(MainMenu __instance)
         {
-            currentButtons = AccessTools.Field(typeof(MainMenu), "currentButtons");
-            CreateButton = AccessTools.Method(typeof(MainMenu), "CreateButton");
-            ShowMainMenu = AccessTools.Method(typeof(MainMenu), "ShowMainMenu");
-            
-        }
-
-        [HarmonyPostfix]
-        public static void Postfix(MainMenu __instance)
-        {
-            if (Patched)
-                return;
-            Printer.Warn("Patching main menu");
             if (Main.ModConfigsTypes.Count == 0)
             {
-                Patched = true;
+                Printer.Error($"Tried to add config button to main menu, but there was no config loaded");
                 return;
             }
-            List<MainMenuButton> buttons = (List<MainMenuButton>)currentButtons.GetValue(__instance);
-            if (buttons == null)
-                return;
-            buttons.Insert(5, CreateConfigButton(__instance));
-            Patched = true;
-            ShowMainMenu.Invoke(__instance, null);
+
+            var button = CreateConfigButton();
+            MainMenuUtils.AddMainMenuButton(button, 5);
         }
 
-        private static MainMenuButton CreateConfigButton(MainMenu __instance)
+        private static MainMenuButton CreateConfigButton()
         {
-            MainMenuButton button = (MainMenuButton)CreateButton.Invoke(__instance, new object[] { Translations.MainMenuButton, null, null });
+            var button = MainMenuUtils.CreateButton(Translations.MainMenuButton);
             foreach (KeyValuePair<ModInfo, Type> config in Main.ModConfigsTypes)
             {
-                button.AddSubmenuItem(CreateConfigSubMenu(__instance, config.Key, config.Value));
+                button.AddSubmenuItem(CreateConfigSubMenu(config.Key, config.Value));
             }
             return button;
         }
 
-        private static MainMenuButton CreateConfigSubMenu(MainMenu __instance, ModInfo info, Type panelType) 
+        private static MainMenuButton CreateConfigSubMenu(ModInfo info, Type panelType) 
         {
             Action<MainMenuButton> action = delegate { 
                 CreatePanelFromConfig(panelType); 
             };
-            MainMenuButton button = (MainMenuButton)CreateButton.Invoke(__instance, new object[]
-            {
-                info.Name,
-                action,
-                null
-            });
+            var button = MainMenuUtils.CreateButton(info.Name, action);
             return button;
         }
 
