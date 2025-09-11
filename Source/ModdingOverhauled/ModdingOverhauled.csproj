@@ -129,7 +129,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 
-  <!-- Automatic version incremenetation -->
+  <!-- Automatic version incrementation -->
 
   <Target Name="IncrementModVersion" AfterTargets="Build">
     <IncrementModVersion JsonFile="$(ProjectDir)..\..\ModInfo.json" />
