@@ -17,7 +17,7 @@
     <NoWarn>$(NoWarn);CS0000</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>embedded</DebugSymbols>
+    <DebugType>embedded</DebugType>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\Libraries\</OutputPath>
@@ -33,10 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <Target Name="ClearOutputPath" BeforeTargets="PrepareForBuild">
-    <RemoveDir Directories="$(OutputPath)" />
-    <MakeDir Directories="$(OutputPath)" />
-  </Target>
+
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\0Harmony.dll</HintPath>
