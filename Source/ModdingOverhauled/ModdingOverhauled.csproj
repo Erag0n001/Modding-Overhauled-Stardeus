@@ -121,6 +121,7 @@
     <Compile Include="Logging\Printer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Misc\Patches\MainMenuPatches.cs" />
+    <Compile Include="Misc\Patches\SteamWorkshopPatches.cs" />
     <Compile Include="Misc\Patches\SystemsDataPatches.cs" />
     <Compile Include="Utils\MainMenuUtils.cs" />
   </ItemGroup>

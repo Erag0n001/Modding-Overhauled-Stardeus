@@ -22,7 +22,7 @@ public static class SpaceSetupWidgetPatches
             
             if (___selectedRegion == null)
             {
-                while (___selectedRegion == null && !___selectedRegion.Sectors.Any(x => x.IsHyperjumpRelay))
+                while (___selectedRegion == null || ! ___selectedRegion.Sectors.Any(x => x.IsHyperjumpRelay))
                 {
                     __instance.SpaceMapViz().SelectRandomRegion(Rng.Unseeded, 1f);
                 }

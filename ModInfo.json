@@ -1,9 +1,9 @@
 {
     "Id" : "Eragon.ModdingOverhauled",
-    "SteamWorkshop" : false,
+    "SteamWorkshop" : true,
     "Name" : "Modding Overhauled",
     "Description" : "Adds various tools for modders, see the steam page or github page for more information",
-    "ModVersion": "1.0.5",
+    "ModVersion": "1.0.9",
     "GameVersion" : "0.14.0",
     "Dependencies" : [ "Core" ]
 }

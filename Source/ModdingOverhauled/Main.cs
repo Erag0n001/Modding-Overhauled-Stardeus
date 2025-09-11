@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Game;
 using Game.Data;
@@ -26,7 +27,7 @@ namespace ModdingOverhauled
         [RuntimeInitializeOnLoadMethod]
         static void StaticConstructorOnStartup()
         {
-            ModdingOverhauled = The.ModLoader.ModInfos["Eragon.ModdingOverhauled"];
+            ModdingOverhauled = The.ModLoader.ModInfos.FirstOrDefault(x => x.Key.Contains("Eragon.ModdingOverhauled")).Value;
             LoadHarmony();
             Printer.Warn("Loaded Modding Overhaul!");
             CheckDirectories();
