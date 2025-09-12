@@ -7,8 +7,8 @@ namespace ModdingOverhauled.Extensions;
 
 public static class SpaceSetupWidgetExtensions
 {
-    private static readonly MethodInfo NextMethod = AccessTools.Method(typeof(SpaceSetupWidgetExtensions), "Next");
-    private static readonly FieldInfo SpaceMapVizGetter = AccessTools.Field(typeof(SpaceSetupWidgetExtensions), "spaceMapViz");
+    private static readonly MethodInfo NextMethod = AccessTools.Method(typeof(SpaceSetupWidget), "Next");
+    private static readonly FieldInfo SpaceMapVizGetter = AccessTools.Field(typeof(SpaceSetupWidget), "spaceMapViz");
     private static readonly MethodInfo DoNextMethod = AccessTools.Method(typeof(SpaceSetupWidget), "DoNext");
     
     public static void Next(SpaceSetupWidget instance)

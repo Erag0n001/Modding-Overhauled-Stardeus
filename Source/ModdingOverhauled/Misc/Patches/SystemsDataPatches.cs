@@ -40,5 +40,16 @@ namespace ModdingOverhauled.Misc.Patches
                 data.SpecialData.ModData = new Dictionary<string, byte[]>();
             }
         }
+        
+        [HarmonyPatch(typeof(SystemsData), nameof(SystemsData.Deserialize))]
+        public static class DeserializePatch
+        {
+            [HarmonyPrefix]
+            private static void Prefix(SystemsData data)
+            {
+                if(data.SpecialData.ModData == null)
+                    data.SpecialData.ModData = new Dictionary<string, byte[]>();
+            }
+        }
     }
 }
