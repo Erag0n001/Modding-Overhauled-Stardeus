@@ -15,7 +15,7 @@ public static class SpaceSetupWidgetPatches
         [HarmonyPostfix]
         public static void Postfix(SpaceSetupWidget __instance, ref SpaceRegion ___selectedRegion)
         {
-            if (!Main.Config.DevShortcuts)
+            if (!Main.Config.DevShortcuts || !DeveloperShortcutsConst.IsDoingQuickest || !__instance.SpaceMapViz())
             {
                 return;
             }
@@ -24,11 +24,12 @@ public static class SpaceSetupWidgetPatches
             {
                 while (___selectedRegion == null || ! ___selectedRegion.Sectors.Any(x => x.IsHyperjumpRelay))
                 {
-                    __instance.SpaceMapViz().SelectRandomRegion(Rng.Unseeded, 1f);
+                    __instance.SpaceMapViz()?.SelectRandomRegion(Rng.Unseeded, 1f);
                 }
             }
 
             __instance.DoNext();
+            DeveloperShortcutsConst.IsDoingQuickest = false;
         }
     }
 }

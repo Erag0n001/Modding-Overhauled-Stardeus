@@ -47,6 +47,10 @@
       <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\Game.CodeGen.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Game.Constants">
+      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\Game.Constants.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Game.I18n">
       <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\Game.I18n.dll</HintPath>
       <Private>False</Private>
@@ -113,6 +117,7 @@
     <Compile Include="Configs\ConfigDataModdingOverhaul.cs" />
     <Compile Include="Configs\ConfigHooks.cs" />
     <Compile Include="Configs\ModConfigsModdingOverhaul.cs" />
+    <Compile Include="DeveloperShortcuts\DeveloperShortcutsConst.cs" />
     <Compile Include="DeveloperShortcuts\Patches\MainMenuPatches.cs" />
     <Compile Include="DeveloperShortcuts\Patches\ScenarioSetupWidgetPatches.cs" />
     <Compile Include="DeveloperShortcuts\Patches\SpaceSetupWidgetPatches.cs" />
@@ -124,6 +129,7 @@
     <Compile Include="Misc\Patches\SteamWorkshopPatches.cs" />
     <Compile Include="Misc\Patches\SystemsDataPatches.cs" />
     <Compile Include="Utils\MainMenuUtils.cs" />
+    <Compile Include="Utils\ReflectionUtilities.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 

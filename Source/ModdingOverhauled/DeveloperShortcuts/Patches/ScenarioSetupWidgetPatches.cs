@@ -12,7 +12,7 @@ public static class ScenarioSetupWidgetPatches
         [HarmonyPostfix]
         public static void Postfix(ScenarioSetupWidget __instance)
         {
-            if (!Main.Config.DevShortcuts)
+            if (!Main.Config.DevShortcuts || !DeveloperShortcutsConst.IsDoingQuickest)
             {
                 return;
             }

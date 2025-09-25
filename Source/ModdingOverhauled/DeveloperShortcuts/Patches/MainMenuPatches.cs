@@ -3,6 +3,7 @@ using Game.UI;
 using Game.Utils;
 using HarmonyLib;
 using KL.Utils;
+using ModdingOverhauled.Misc;
 using ModdingOverhauled.Utils;
 using Translations = ModdingOverhauled.ConfigModule.Translations;
 
@@ -31,6 +32,7 @@ public static class MainMenuPatches
         
         private static void StartQuickTest(MainMenuButton mainMenuButton)
         {
+            DeveloperShortcutsConst.IsDoingQuickest = true;
             The.BB.Set(-2132387920, 0);
             The.BB.Set(-1255412797, "new_game");
             The.BB.Set(362542026, "sandbox");
