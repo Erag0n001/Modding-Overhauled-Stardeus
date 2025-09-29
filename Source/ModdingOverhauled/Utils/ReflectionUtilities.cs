@@ -13,21 +13,32 @@ public static class ReflectionUtilities
     /// </summary>
     public static Delegate CreateMethodCall(MethodInfo info)
     {
-        var parameterTypes = info.GetParameters().Select(p => p.ParameterType).ToArray();
+        var parameterTypes = info.GetParameters().Select(p => p.ParameterType).ToList();
+        if (!info.IsStatic)
+        {
+            parameterTypes.Insert(0, info.DeclaringType!);
+        }
         var method = new DynamicMethod(
             "Call" + info.Name,
             info.ReturnType,
-            parameterTypes.Length == 0 ? [typeof(object)] : parameterTypes,
+            parameterTypes.ToArray(),
             true);
 
         var il = method.GetILGenerator();
         
-        for (short i = 0; i < parameterTypes.Length; i++)
+        for (short i = 0; i < parameterTypes.Count; i++)
         {
             il.Emit(OpCodes.Ldarg, i);
         }
 
-        il.Emit(OpCodes.Call, info);
+        if (info.IsVirtual)
+        {
+            il.Emit(OpCodes.Callvirt, info);
+        }
+        else
+        {
+            il.Emit(OpCodes.Call, info);
+        }
         il.Emit(OpCodes.Ret);
 
         return method.CreateDelegate(Expression.GetDelegateType(parameterTypes.Concat(new[] { info.ReturnType }).ToArray()));
