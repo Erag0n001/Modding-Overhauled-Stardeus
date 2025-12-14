@@ -18,7 +18,6 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>embedded</DebugType>
-    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\Libraries\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -121,6 +120,7 @@
     <Compile Include="DeveloperShortcuts\Patches\MainMenuPatches.cs" />
     <Compile Include="DeveloperShortcuts\Patches\ScenarioSetupWidgetPatches.cs" />
     <Compile Include="DeveloperShortcuts\Patches\SpaceSetupWidgetPatches.cs" />
+    <Compile Include="Extensions\OpCodeExtensions.cs" />
     <Compile Include="Extensions\ScenarioSetupWidgetExtensions.cs" />
     <Compile Include="Extensions\SpaceSetupWidgetExtensions.cs" />
     <Compile Include="Logging\Printer.cs" />
@@ -130,6 +130,8 @@
     <Compile Include="Misc\Patches\SystemsDataPatches.cs" />
     <Compile Include="Utils\MainMenuUtils.cs" />
     <Compile Include="Utils\ReflectionUtilities.cs" />
+    <Compile Include="Utils\StackCrawler.cs" />
+    <Compile Include="Utils\StackCrawlerVerifier.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
+using ModdingOverhauled.Logging;
 
 namespace ModdingOverhauled.Utils;
 
@@ -40,8 +41,71 @@ public static class ReflectionUtilities
             il.Emit(OpCodes.Call, info);
         }
         il.Emit(OpCodes.Ret);
+        
+        return method.CreateDelegate(Expression.GetDelegateType(parameterTypes.Concat([info.ReturnType]).ToArray()));
+    }
+    
+    public static Delegate CreateMethodCall(MethodInfo info, Type delegateType)
+    {
+        var parameterTypes = info.GetParameters().Select(p => p.ParameterType).ToList();
+        if (!info.IsStatic)
+            parameterTypes.Insert(0, info.DeclaringType!);
 
-        return method.CreateDelegate(Expression.GetDelegateType(parameterTypes.Concat(new[] { info.ReturnType }).ToArray()));
+        var method = new DynamicMethod(
+            "Call" + info.Name,
+            info.ReturnType,
+            parameterTypes.ToArray(),
+            true);
+
+        var il = method.GetILGenerator();
+        for (short i = 0; i < parameterTypes.Count; i++)
+            il.Emit(OpCodes.Ldarg, i);
+
+        il.Emit(info.IsVirtual ? OpCodes.Callvirt : OpCodes.Call, info);
+        il.Emit(OpCodes.Ret);
+
+        return method.CreateDelegate(delegateType);
+    }
+    
+    /// <summary>
+    /// Creates a performant delegate to call and boxes the result. Useful for private nested types
+    /// </summary>
+    public static Delegate CreateMethodCallBox(MethodInfo info)
+    {
+        var parameterTypes = info.GetParameters().Select(p => p.ParameterType).ToList();
+        if (!info.IsStatic)
+        {
+            parameterTypes.Insert(0, info.DeclaringType!);
+        }
+        var method = new DynamicMethod(
+            "Call" + info.Name,
+            typeof(object),
+            parameterTypes.ToArray(),
+            true);
+
+        var il = method.GetILGenerator();
+        
+        for (short i = 0; i < parameterTypes.Count; i++)
+        {
+            il.Emit(OpCodes.Ldarg, i);
+        }
+
+        if (info.IsVirtual)
+        {
+            il.Emit(OpCodes.Callvirt, info);
+        }
+        else
+        {
+            il.Emit(OpCodes.Call, info);
+        }
+        if (info.ReturnType.IsValueType)
+        {
+            il.Emit(OpCodes.Box, info.ReturnType);
+        }
+        il.Emit(OpCodes.Ret);
+        
+        return method.CreateDelegate(
+            Expression.GetDelegateType(parameterTypes.Concat([typeof(object)]).ToArray()));
     }
     
     /// <summary>
@@ -49,10 +113,10 @@ public static class ReflectionUtilities
     /// </summary>
     /// <typeparam name="T">Type the field is stored on (Aka Argument 0, or "this")</typeparam>
     /// <typeparam name="TValue">Type of the field</typeparam>
-    public static Func<T, TValue> CreateSetter<T, TValue>(FieldInfo fieldInfo)
+    public static Action<T, TValue> CreateSetter<T, TValue>(FieldInfo fieldInfo)
     {
         var method = new DynamicMethod(
-            "Get" + fieldInfo.Name,
+            "Set" + fieldInfo.Name,
             typeof(void),
             [typeof(T), typeof(TValue)],
             true);
@@ -63,7 +127,7 @@ public static class ReflectionUtilities
         il.Emit(OpCodes.Stfld, fieldInfo);
         il.Emit(OpCodes.Ret);
         
-        return (Func<T, TValue>)method.CreateDelegate(typeof(Func<T, TValue>));
+        return (Action<T, TValue>)method.CreateDelegate(typeof(Action<T, TValue>));
     }
 
     /// <summary>
