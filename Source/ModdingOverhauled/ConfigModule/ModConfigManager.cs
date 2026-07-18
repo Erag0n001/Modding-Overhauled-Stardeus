@@ -5,9 +5,9 @@ using System.Linq;
 using System.Reflection;
 using Game.Data;
 using KL.Utils;
-using MessagePack;
 using ModdingOverhauled.ConfigModule.UI;
 using ModdingOverhauled.Logging;
+using ModdingOverhauled.Utils;
 
 namespace ModdingOverhauled.ConfigModule
 {
@@ -21,7 +21,7 @@ namespace ModdingOverhauled.ConfigModule
         {
             if (config != null)
             {
-                ModInfo mod = Main.ModConfigsTypes.Keys.Where(k => Main.ModConfigsTypes[k] == config.GetType()).FirstOrDefault();
+                ModInfo mod = Main.ModConfigsTypes.Keys.FirstOrDefault(k => Main.ModConfigsTypes[k] == config.GetType());
                 if (mod == null)
                 {
                     Printer.Error($"Could not save config from {config.GetType().Name} because there are no attached ids to it.");
@@ -37,7 +37,7 @@ namespace ModdingOverhauled.ConfigModule
                 {
                     data = ConfigData.LoadConfig(mod.Id);
                 }
-                File.WriteAllBytes(pathForConfig, MessagePackSerializer.Serialize(Main.ConfigFromMod[mod].GetType(), Main.ConfigFromMod[mod]));
+                File.WriteAllBytes(pathForConfig, MessagePackBypass.Serialize(Main.ConfigFromMod[mod].GetType(), data));
             }
         }
 

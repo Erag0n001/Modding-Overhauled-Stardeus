@@ -1,0 +1,17 @@
+{
+  "Id" : "Decals",
+  "Name" : "decals",
+  "SortOrder" : 40,
+  "CullingLayer" : 17,
+  "HasGrid" : true,
+  "HasTileRendererLayer" : true,
+  "ResetFromGridData" : true,
+  "IsData" : false,
+  "IsConnected" : false,
+  "IsPersistentTileOnGrid" : false,
+  "HasPersistentComponents" : false,
+  "RenderQueueOverride" : 500,
+  "Shader" : "Decals",
+  "ForcedLayerId" : 4,
+  "BlockedBy" : ["Walls"]
+}

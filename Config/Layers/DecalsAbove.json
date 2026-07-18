@@ -1,0 +1,16 @@
+{
+  "Id" : "DecalsAbove",
+  "Name": "decals_above",
+  "SortOrder" : 50,
+  "CullingLayer" : 19,
+  "HasGrid" : true,
+  "HasTileRendererLayer" : true,
+  "ResetFromGridData" : true,
+  "IsData" : false,
+  "IsConnected" : false,
+  "IsPersistentTileOnGrid" : false,
+  "HasPersistentComponents" : false,
+  "Shader" : "DecalsAbove",
+  "ForcedLayerId" : 5,
+  "BlockedBy" : ["Walls"]
+}

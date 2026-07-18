@@ -1,0 +1,16 @@
+{
+  "Id" : "ObjectsAbove",
+  "Name": "objects",
+  "SortOrder" : 60,
+  "CullingLayer" : 23,
+  "HasGrid" : true,
+  "HasTileRendererLayer" : true,
+  "ResetFromGridData" : false,
+  "IsData" : false,
+  "IsConnected" : false,
+  "IsPersistentTileOnGrid" : false,
+  "HasPersistentComponents" : false,
+  "Shader" : "AboveTile",
+  "ForcedLayerId" : 6,
+  "BlockedBy" : ["Walls"]
+}

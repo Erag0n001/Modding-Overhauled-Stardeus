@@ -1,0 +1,21 @@
+{
+  "Id" : "Floor",
+  "Name" : "floor",
+  "SortOrder" : 0,
+  "CullingLayer" : 12,
+  "HasGrid" : true,
+  "HasTileRendererLayer" : true,
+  "ResetFromGridData" : true,
+  "IsData" : true,
+  "IsConnected" : false,
+  "IsPersistentTileOnGrid" : true,
+  "HasPersistentComponents" : true,
+  "CanAttachSpaceDevice" : true,
+  "Shader" : "SolidFloorTile",
+  "ForcedLayerId" : 0,
+  "SelectionOrder" : 100,
+  "PathFindingInfo" : {
+    "Priority" : 0,
+    "LayerType" : "Floor"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "Id" : "FreeEntities",
+  "Name": "free_entities",
+  "SortOrder" : 30,
+  "CullingLayer" : -1,
+  "HasGrid" : false,
+  "HasTileRendererLayer" : false,
+  "ResetFromGridData" : false,
+  "IsData" : false,
+  "IsConnected" : false,
+  "IsPersistentTileOnGrid" : false,
+  "HasPersistentComponents" : true,
+  "Shader" : "ObjTile",
+  "ForcedLayerId" : 3,
+  "BlockedBy" : ["Walls"]
+}

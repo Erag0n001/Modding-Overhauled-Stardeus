@@ -4,7 +4,7 @@
     "Name" : "Modding Overhauled",
     "Description" : "Adds various tools for modders, see the steam page or github page for more information",
     "DescriptionSteam": "[h1] Why do I need this [/h1]\nOne of my mod probably requires it. This does nothing on its own\n[h1] What can it do? [/h1]\nIt has various tools that are shared across my mods and for mod development, you can find more information on the github here:https://github.com/Erag0n001/Modding-Overhauled-Stardeus",
-    "ModVersion": "1.0.13",
+    "ModVersion": "1.0.202",
     "GameVersion" : "0.14.0",
     "Dependencies" : [ "Core" ]
 }

@@ -1,176 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E7DC1A13-10E4-49C7-9B2C-60AA26626371}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ModdingOverhauled</RootNamespace>
-    <AssemblyName>ModdingOverhauled</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <TargetFramework>net481</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
-    <NoWarn>$(NoWarn);CS0000</NoWarn>
+    <OutputPath>..\..\Libraries</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <AppendConfigurationToOutputPath>false</AppendConfigurationToOutputPath>
+    <DebugType>embedded</DebugType>
+    <RootNamespace>ModdingOverhauled</RootNamespace>
+    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>embedded</DebugType>
-    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Libraries\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>embedded</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\Libraries\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\0Harmony.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Game">
-      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\Game.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Game.CodeGen">
-      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\Game.CodeGen.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Game.I18n">
-      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\Game.I18n.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Game.Utils">
-      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\Game.Utils.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="KLUnityUtils">
-      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\KLUnityUtils.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MessagePack">
-      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\MessagePack.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MessagePack.Annotations">
-      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\MessagePack.Annotations.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="mscorlib">
-      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\mscorlib.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\Unity.TextMeshPro.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.AudioModule">
-      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>G:\Steam\steamapps\common\Stardeus\Stardeus_Data\Managed\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AssetBundleModule\AssetBundleManager.cs" />
-    <Compile Include="AssetBundleModule\AssetCache.cs" />
-    <Compile Include="AssetBundleModule\Patches\ModLoaderPatch.cs" />
-    <Compile Include="ConfigModule\ConfigData.cs" />
-    <Compile Include="ConfigModule\ModConfigManager.cs" />
-    <Compile Include="ConfigModule\Patches\MainMenuPatch.cs" />
-    <Compile Include="ConfigModule\Patches\ModLoaderPatch.cs" />
-    <Compile Include="ConfigModule\Translations.cs" />
-    <Compile Include="ConfigModule\UI\ModConfigs.cs" />
-    <Compile Include="Configs\ConfigDataModdingOverhaul.cs" />
-    <Compile Include="Configs\ConfigHooks.cs" />
-    <Compile Include="Configs\ModConfigsModdingOverhaul.cs" />
-    <Compile Include="DeveloperShortcuts\Patches\MainMenuPatches.cs" />
-    <Compile Include="DeveloperShortcuts\Patches\ScenarioSetupWidgetPatches.cs" />
-    <Compile Include="DeveloperShortcuts\Patches\SpaceSetupWidgetPatches.cs" />
-    <Compile Include="Extensions\ScenarioSetupWidgetExtensions.cs" />
-    <Compile Include="Extensions\SpaceSetupWidgetExtensions.cs" />
-    <Compile Include="Logging\Printer.cs" />
-    <Compile Include="Main.cs" />
-    <Compile Include="Misc\Patches\MainMenuPatches.cs" />
-    <Compile Include="Misc\Patches\SteamWorkshopPatches.cs" />
-    <Compile Include="Misc\Patches\SystemsDataPatches.cs" />
-    <Compile Include="Utils\MainMenuUtils.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <GameDir>/home/eragon/.local/share/Steam/steamapps/common/Stardeus/Stardeus_Data/Managed</GameDir>
+  </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="$(GameDir)/*.dll">
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <AdditionalFiles
+            Include="..\..\Config\**\*.json"
+            Link="Config\%(RecursiveDir)%(Filename)%(Extension)" />
+    <AdditionalFiles
+            Include="..\..\Definitions\**\*.json"
+            Link="Definitions\%(RecursiveDir)%(Filename)%(Extension)" />
+    <AdditionalFiles
+            Include="..\..\Patches\**\*.json"
+            Link="Patches\%(RecursiveDir)%(Filename)%(Extension)" />
+    <AdditionalFiles
+            Include="..\..\Translations\**\*.csv"
+            Link="Translations\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Content Include="..\..\ModInfo.json">
+      <Link>ModInfo.json</Link>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IsExternalInit" Version="1.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  
   <!-- Automatic version incrementation -->
 
   <Target Name="IncrementModVersion" AfterTargets="Build">
     <IncrementModVersion JsonFile="$(ProjectDir)..\..\ModInfo.json" />
   </Target>
-  
-  <UsingTask TaskName="IncrementModVersion"
-             TaskFactory="CodeTaskFactory"
-             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
-    <ParameterGroup>
-      <JsonFile ParameterType="System.String" Required="true" />
-    </ParameterGroup>
-    <Task>
-      <Using Namespace="System" />
-      <Using Namespace="System.IO" />
-      <Using Namespace="System.Text.RegularExpressions" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
-        if (!File.Exists(JsonFile))
-        {
-            Log.LogError("File not found: " + JsonFile);
-            return false;
-        }
-
-        string text = File.ReadAllText(JsonFile);
-
-        text = Regex.Replace(text,
-            @"""ModVersion""\s*:\s*""(\d+)\.(\d+)\.(\d+)""",
-            delegate(Match m)
-            {
-                int major = int.Parse(m.Groups[1].Value);
-                int minor = int.Parse(m.Groups[2].Value);
-                int build = int.Parse(m.Groups[3].Value) + 1;
-
-                return "\"ModVersion\": \"" + major + "." + minor + "." + build + "\"";
-            }
-        );
-
-        File.WriteAllText(JsonFile, text);
-
-        return true;
-      ]]>
-      </Code>
-    </Task>
-  </UsingTask>
-  
+  <UsingTask TaskName="IncrementModVersion" AssemblyFile="$(MSBuildProjectDirectory)\..\Tasks\StardeusVersionController.dll" />
 </Project>

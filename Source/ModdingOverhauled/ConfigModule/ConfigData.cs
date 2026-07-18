@@ -5,6 +5,7 @@ using Game;
 using Game.Data;
 using MessagePack;
 using ModdingOverhauled.Logging;
+using ModdingOverhauled.Utils;
 
 namespace ModdingOverhauled.ConfigModule
 {
@@ -43,14 +44,14 @@ namespace ModdingOverhauled.ConfigModule
 
             if (File.Exists(pathForConfig))
             {
-                config = (ConfigData)MessagePackSerializer.Deserialize(
+                config = (ConfigData)MessagePackBypass.Deserialize(
                     Main.ConfigDataTypes[info],
                     File.ReadAllBytes(pathForConfig));
             }
             else
             {
                 config = (ConfigData)Activator.CreateInstance(Main.ConfigDataTypes[info], true);
-                File.WriteAllBytes(pathForConfig, MessagePackSerializer.Serialize(Main.ConfigDataTypes[info], config));
+                File.WriteAllBytes(pathForConfig, MessagePackBypass.Serialize(Main.ConfigDataTypes[info], config));
             }
             Main.ConfigFromMod[info] = config;
             return config;

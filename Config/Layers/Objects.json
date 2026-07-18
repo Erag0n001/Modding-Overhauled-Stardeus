@@ -1,0 +1,23 @@
+{
+  "Id" : "Objects",
+  "Name": "objects",
+  "SortOrder" : 20,
+  "CullingLayer" : 18,
+  "HasGrid" : true,
+  "HasTileRendererLayer" : true,
+  "ResetFromGridData" : true,
+  "IsData" : true,
+  "IsConnected" : false,
+  "IsPersistentTileOnGrid" : true,
+  "HasPersistentComponents" : true,
+  "LayerAbove" : "ObjectsAbove",
+  "Shader" : "ObjTile",
+  "ForcedLayerId" : 2,
+  "SelectionOrder" : 300,
+  "BlockedBy" : ["Walls"],
+  "CanBePlacedOn" : ["Floor"],
+  "PathFindingInfo" : {
+    "Priority" : 0,
+    "LayerType" : "Objects"
+  }
+}

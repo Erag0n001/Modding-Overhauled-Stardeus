@@ -1,0 +1,22 @@
+{
+  "Id" : "Walls",
+  "Name": "walls",
+  "SortOrder" : 10,
+  "CullingLayer" : 15,
+  "HasGrid" : true,
+  "HasTileRendererLayer" : true,
+  "ResetFromGridData" : true,
+  "IsData" : true,
+  "IsConnected" : true,
+  "IsPersistentTileOnGrid" : true,
+  "HasPersistentComponents" : true,
+  "Shader" : "WallTile",
+  "ForcedLayerId" : 1,
+  "SelectionOrder" : 200,
+  "BlockedBy" : ["Walls"],
+  "CanBePlacedOn" : ["Floor"],
+  "PathFindingInfo" : {
+    "Priority" : 0,
+    "LayerType" : "Walls"
+  }
+}

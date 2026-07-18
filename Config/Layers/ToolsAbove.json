@@ -1,0 +1,16 @@
+{
+  "Id" : "ToolsAbove",
+  "Name": "tools",
+  "SortOrder" : 80,
+  "CullingLayer" : 28,
+  "HasGrid" : false,
+  "HasTileRendererLayer" : true,
+  "ResetFromGridData" : false,
+  "IsData" : false,
+  "IsConnected" : false,
+  "IsPersistentTileOnGrid" : false,
+  "HasPersistentComponents" : false,
+  "Shader" : "ToolTile",
+  "ForcedLayerId" : 8,
+  "BlockedBy" : ["Walls"]
+}
